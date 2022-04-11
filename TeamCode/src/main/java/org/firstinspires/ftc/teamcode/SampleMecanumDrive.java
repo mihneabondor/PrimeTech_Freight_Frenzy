@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode;
 
 import androidx.annotation.NonNull;
 
@@ -35,17 +35,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_ACCEL;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_ANG_ACCEL;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_ANG_VEL;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MAX_VEL;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.DriveConstants.MAX_ACCEL;
+import static org.firstinspires.ftc.teamcode.DriveConstants.MAX_ANG_ACCEL;
+import static org.firstinspires.ftc.teamcode.DriveConstants.MAX_ANG_VEL;
+import static org.firstinspires.ftc.teamcode.DriveConstants.MAX_VEL;
+import static org.firstinspires.ftc.teamcode.DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.DriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.teamcode.DriveConstants.TRACK_WIDTH;
+import static org.firstinspires.ftc.teamcode.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.DriveConstants.kA;
+import static org.firstinspires.ftc.teamcode.DriveConstants.kStatic;
+import static org.firstinspires.ftc.teamcode.DriveConstants.kV;
 
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
@@ -116,10 +116,10 @@ public class SampleMecanumDrive extends MecanumDrive {
         // For example, if +Y in this diagram faces downwards, you would use AxisDirection.NEG_Y.
         // BNO055IMUUtil.remapZAxis(imu, AxisDirection.NEG_Y);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, "LeftFrontMotor");
+        leftRear = hardwareMap.get(DcMotorEx.class, "LeftBackMotor");
+        rightRear = hardwareMap.get(DcMotorEx.class, "RightBackMotor");
+        rightFront = hardwareMap.get(DcMotorEx.class, "RightFrontMotor");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
