@@ -64,7 +64,7 @@ public class Test_Autonom extends LinearOpMode  {
     public void runOpMode() throws InterruptedException {
         robot = new SampleMecanumDrive(hardwareMap);
 
-        robot.setPoseEstimate(new Pose2d(-11.6,-62));
+        robot.setPoseEstimate(new Pose2d(11.6,-62));
         robot.setExternalHeading(Math.toRadians(0));
 
         dashboard = FtcDashboard.getInstance();
@@ -78,9 +78,10 @@ public class Test_Autonom extends LinearOpMode  {
         currentPose = robot.getPoseEstimate();
 
         TrajectorySequence punePreload = robot.trajectorySequenceBuilder(new Pose2d(11.6, -62, Math.toRadians(90)))
-                .forward(12)
+                .lineTo(new Vector2d(0,0),SampleMecanumDrive.getVelocityConstraint(62.01654253906262, 5.788888931274414,10),
+                        SampleMecanumDrive.getAccelerationConstraint(49))
                 .build();
-        
+
         robot.followTrajectorySequence(punePreload);
 
         robot.updatePoseEstimate();
