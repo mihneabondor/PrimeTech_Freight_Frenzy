@@ -44,7 +44,7 @@ public class AutonomAlbastruDreapta3 extends LinearOpMode{
     public int caz = 1;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException{
 
         robot.init(hardwareMap);
 
