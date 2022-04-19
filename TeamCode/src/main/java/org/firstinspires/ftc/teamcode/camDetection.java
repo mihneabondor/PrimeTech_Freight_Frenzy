@@ -24,8 +24,8 @@ public class camDetection extends OpenCvPipeline {
             new Point(120, 75)
     );
     static final Rect RIGHT_ROI = new Rect(
-            new Point(140, 35),
-            new Point(200, 75)
+            new Point(220, 35),
+            new Point(280, 75)
     );
     static double PERCENT_TRESHOLD = 0.4;
     public camDetection(Telemetry t) {telemetry = t;}
@@ -33,8 +33,8 @@ public class camDetection extends OpenCvPipeline {
     @Override
     public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-        Scalar lowHSV = new Scalar(51, 96, 80);
-        Scalar highHSV = new Scalar(77, 255, 0);
+        Scalar lowHSV = new Scalar(59, 50, 40);
+        Scalar highHSV = new Scalar(99, 88, 100);
 
         Core.inRange(mat, lowHSV, highHSV, mat);
 
@@ -68,8 +68,8 @@ public class camDetection extends OpenCvPipeline {
         telemetry.update();
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2BGR);
 
-        Scalar colorNimic = new Scalar(23, 50, 70); // LOW
-        Scalar colorRata = new Scalar(32, 255, 255);  // HIGH
+        Scalar colorNimic = new Scalar(255, 0, 0); // LOW
+        Scalar colorRata = new Scalar(0, 255, 0);  // HIGH
 
         Imgproc.rectangle(mat, LEFT_ROI, caz == caz.UNU ? colorRata: colorNimic);
         Imgproc.rectangle(mat, RIGHT_ROI, caz == caz.TREI ? colorRata: colorNimic);

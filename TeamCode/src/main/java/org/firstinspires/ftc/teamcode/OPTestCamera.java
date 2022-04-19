@@ -21,7 +21,7 @@ public class OPTestCamera extends LinearOpMode {
     public void runOpMode() {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "webcam");
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId); /// TODO: problema ii aci
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
         detector = new camDetection(telemetry);
         webcam.setPipeline(detector);
         dashboard = FtcDashboard.getInstance();
