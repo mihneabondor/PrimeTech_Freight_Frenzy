@@ -33,7 +33,7 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.StrafeValue;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
 
-@Autonomous(name="AutonomRosuStanga")
+@Autonomous(name="Rosu Stanga", group = "oficial")
 public class AutonomRosuStanga extends LinearOpMode{
     A_hardwareMap robot   = new A_hardwareMap();
 

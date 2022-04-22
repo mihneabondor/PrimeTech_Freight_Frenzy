@@ -29,7 +29,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-@TeleOp(name="Teleop Albastru", group="Iterative Opmode")
+@TeleOp(name="Albastru", group="oficial")
 
 public class TeleopAlbastru extends OpMode
 {

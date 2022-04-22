@@ -33,6 +33,8 @@ public class camDetection extends OpenCvPipeline {
     @Override
     public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
+
+        // FIXME: adjust colors (luminosity)
         Scalar lowHSV = new Scalar(59, 50, 40);
         Scalar highHSV = new Scalar(99, 88, 100);
 

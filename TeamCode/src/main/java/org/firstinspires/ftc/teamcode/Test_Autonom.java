@@ -52,7 +52,7 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
 
 
-@Autonomous(name="A. Coordonate", group = "Auto")
+@Autonomous(name="Coordonate", group = "Auto")
 public class Test_Autonom extends LinearOpMode  {
     FtcDashboard dashboard;
     private SampleMecanumDrive robot = null;

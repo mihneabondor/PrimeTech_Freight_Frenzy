@@ -29,7 +29,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-@TeleOp(name="Teleop Rosu", group="Iterative Opmode")
+@TeleOp(name="Rosu", group="oficial")
 
 public class TeleopRosu extends OpMode
 {

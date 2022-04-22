@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.misc;
 
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -14,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+import org.firstinspires.ftc.teamcode.A_hardwareMap;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,9 +28,9 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.StrafeValue;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
 
-@Autonomous(name="Autonom_Rosu_Dreapta")
+@Autonomous(name="Autonom_Albastru_Stanga")
 @Disabled
-public class Autonom_Rosu_Dreapta extends LinearOpMode{
+public class Autonom_Albastru_Stanga extends LinearOpMode{
     A_hardwareMap robot   = new A_hardwareMap();
 
     public double putere = 1;
@@ -64,12 +65,20 @@ public class Autonom_Rosu_Dreapta extends LinearOpMode{
         sleep(1500);
         robot.ridicare.setPower(0);
         StopAllMotion();
-        DriveForward(5, 0.5, 0.5, 0.5, 0.5);
+        DriveForward(35, 0.5, 0.5, 0.5, 0.5);
+        RotateRight(75);
+        robot.LeftBackMotor.setPower(0);
+        robot.RightBackMotor.setPower(0);
+        robot.LeftFrontMotor.setPower(0);
+        robot.RightFrontMotor.setPower(0);
+        sleep(500);
+        DriveBackward(110,0.5, 0.5, 0.5, 0.5);
+        /*
 
         if(robot.distanta.getDistance(DistanceUnit.CM) < 65) {
 
             DriveForward(30, 0.5, 0.5, 0.5, 0.5);
-            RotateLeft(33);
+            RotateRight(33);
             DriveForward(35,0.5,0.5,0.5,0.5);
             robot.LeftBackMotor.setPower(0);
             robot.RightBackMotor.setPower(0);
@@ -88,13 +97,14 @@ public class Autonom_Rosu_Dreapta extends LinearOpMode{
             robot.LeftFrontMotor.setPower(0);
             robot.RightFrontMotor.setPower(0);
             DriveBackward(10,0.3,0.3,0.3,0.3);
-            RotateLeft(45);
+            RotateRight(25);
             DriveBackward(95,0.3,0.3,0.3,0.3);
             robot.LeftBackMotor.setPower(0);
             robot.RightBackMotor.setPower(0);
             robot.LeftFrontMotor.setPower(0);
             robot.RightFrontMotor.setPower(0);
-            RotateLeft(17);
+            /*
+            RotateRight(17);
             DriveBackward(40,0.5,0.5,0.5,0.5);
             RotateRight(20);
             DriveBackward(20,0.5,0.5,0.5,0.5);
@@ -173,7 +183,7 @@ public class Autonom_Rosu_Dreapta extends LinearOpMode{
             }
             //sleep(1000);
             //StopAllMotion();
-        }
+        }*/
 
         StopAllMotion();
 

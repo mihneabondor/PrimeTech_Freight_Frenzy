@@ -38,7 +38,7 @@ public class OPTestCamera extends LinearOpMode {
 
         );
 
-        waitForStart(); // TODO: fix the fucking colors
+        waitForStart();
         switch (detector.getCaz()) {
             case UNU:
                 /// ...

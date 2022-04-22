@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.misc;
 
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -17,6 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+import org.firstinspires.ftc.teamcode.A_hardwareMap;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
@@ -32,10 +33,9 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.DriveValue;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.StrafeValue;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
-
-@Autonomous(name="AutonomAlbastruDreapta3")
-
-public class AutonomAlbastruDreapta3 extends LinearOpMode{
+@Disabled
+@Autonomous(name="Autonom_Rosu_Stanga")
+public class Autonom_Rosu_Stanga extends LinearOpMode{
     A_hardwareMap robot   = new A_hardwareMap();
 
     public double putere = 1;
@@ -44,7 +44,10 @@ public class AutonomAlbastruDreapta3 extends LinearOpMode{
     public int caz = 1;
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
+
+
+
 
         robot.init(hardwareMap);
 
@@ -61,131 +64,144 @@ public class AutonomAlbastruDreapta3 extends LinearOpMode{
         robot.RightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.RightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        robot.ridicare.setDirection(FORWARD);
-        
-        robot.RightBackMotor.setDirection(REVERSE);
-        robot.RightFrontMotor.setDirection(REVERSE);
-        robot.LeftBackMotor.setDirection(FORWARD);
-        robot.LeftFrontMotor.setDirection(FORWARD);
+        robot.ridicare.setDirection(REVERSE);
         telemetry.update();
 
 
         waitForStart();
-        
-        ///sleep(2000);
+        /*
         robot.prindere.setPosition(0.2);
         sleep(250);
         robot.ridicare.setPower(0.7);
         sleep(550);
         robot.ridicare.setPower(0);
-        StopAllMotion();
-        DriveForward(15, 0.5, 0.5, 0.5, 0.5);
-        StopAllMotion();
+        StopAllMotion();*/
+        //////DriveForward(37, 0.9, 0.9, 0.9, 0.9);
+        runUsingEncoders(1, convertire(40), 15);
+        RotateRight(5);
+        if(robot.distanta.getDistance(DistanceUnit.CM)<30)
+            caz = 2;
+        RotateRight(25);
+        if(robot.distanta.getDistance(DistanceUnit.CM)<30)
+            caz = 3;
+        RotateRight(23);
+        runUsingEncoders(1, -convertire(51), 15);
+        robot.carusel.setPower(0.8);
+        sleep(3000);
+        runUsingEncoders(1, convertire(10), 15);
         /*
-        StrafeRight(50,0.5,0.5,0.5,0.5);
-        StopAllMotion();
-        DriveForward(40,0.5,0.5,0.5);
-        StopAllMotion();
-        */
-        
-        if(robot.distanta.getDistance(DistanceUnit.CM) <= 30) {
-            
-            StrafeRight(115, 0.7);
-            sleep(1000);
-            robot.ridicare.setPower(0.4);
-            sleep(400);
+        if(robot.distanta.getDistance(DistanceUnit.CM) < 30) {
+            DriveBackward(5, 0.5, 0.5, 0.5, 0.5);
             StopAllMotion();
-            DriveForward(34, 0.6, 0.6, 0.6, 0.6);
-            StopAllMotion();
-            sleep(500);
-            robot.prindere.setPosition(0.5);
-            StopAllMotion();
-            robot.ridicare.setPower(-0.1);
-            sleep(3);
-            DriveBackward(37, 0.6, 0.6, 0.6, 0.6);
-            StopAllMotion();
+            sleep(200);
+            robot.ridicare.setPower(-0.7);
+            sleep(200);
             robot.ridicare.setPower(0);
+            sleep(200);
+            DriveForward(5, 0.5, 0.5, 0.5, 0.5);
+            RotateRight(55);
+            DriveBackward(71, 0.3, 0.3, 0.3, 0.3);
             StopAllMotion();
-            RotateLeft(82);
-            StopAllMotion();
-            DriveBackward(180, 0.5, 0.5, 0.5, 0.5);
-            StopAllMotion();
-            StrafeRight(50 , 0.5);
-            sleep(1000);
-            robot.carusel.setPower(-1);
+            sleep(200);
+            robot.carusel.setPower(0.9);
             sleep(2000);
-            robot.ridicare.setPower(-0.1);
-            StrafeLeft(100, 0.5);
-            DriveBackward(50 , 0.5 , 0.5 , 0.5 , 0.5);
-            
+            robot.carusel.setPower(0);
+            DriveForward(103,0.5,0.5,0.5,0.5);
+            RotateLeft(35);
+            StopAllMotion();
+            robot.ridicare.setPower(0.7);
+            sleep(800);
+            robot.ridicare.setPower(0);
+            DriveForward(20, 0.5, 0.5, 0.5, 0.5);
+            StopAllMotion();
+            robot.prindere.setPosition(0.5);
+            sleep(500);
+            DriveBackward(10,0.5,0.5,0.5,0.5);
+            DriveBackward(10, 0.5, 0.5, 0.5, 0.5);
+            StopAllMotion();
+            robot.ridicare.setPower(-0.7);
+            sleep(450);
+            robot.ridicare.setPower(0);
+            RotateRight(49);
+            DriveForward(205, 0.7, 0.7, 0.7, 0.7);
+
+
         }
-        
         else
         {
-            StrafeRight(40, 0.4);
-            if (robot.distanta.getDistance(DistanceUnit.CM) <= 30)
+            RotateRight(25);
+            StopAllMotion();
+            StopAllMotion();
+            if(robot.distanta.getDistance(DistanceUnit.CM)<35)
             {
-                StrafeRight(85, 0.7);
-                sleep(1000);
-                robot.ridicare.setPower(-0.1);
-                sleep(400);
                 StopAllMotion();
-                DriveForward(30, 0.6, 0.6, 0.6, 0.6);
+                RotateRight(25);
+                DriveBackward(65, 0.3, 0.3, 0.3, 0.3);
                 StopAllMotion();
-                sleep(500);
-                robot.prindere.setPosition(0.5);
-                StopAllMotion();
-                robot.ridicare.setPower(-0.1);
-                sleep(3);
-                DriveBackward(37, 0.6, 0.6, 0.6, 0.6);
-                StopAllMotion();
+                robot.ridicare.setPower(-0.7);
+                sleep(200);
                 robot.ridicare.setPower(0);
+                sleep(200);
+                robot.carusel.setPower(0.9);
+                sleep(1900);
+                robot.carusel.setPower(0);
+                DriveForward(100,0.5,0.5,0.5,0.5);
+                RotateLeft(30);
                 StopAllMotion();
-                RotateLeft(82);
+                robot.ridicare.setPower(0.7);
+                sleep(1350);
+                robot.ridicare.setPower(0);
+                
+                DriveForward(15, 0.5, 0.5, 0.5, 0.5);
                 StopAllMotion();
-                DriveBackward(190, 0.5, 0.5, 0.5, 0.5);
+                robot.prindere.setPosition(0.5);
+                sleep(500);
+
+                DriveBackward(15, 0.5, 0.5, 0.5, 0.5);
                 StopAllMotion();
-                StrafeRight(65 , 0.5);
-                sleep(1000);
-                robot.carusel.setPower(-1);
-                sleep(2000);
-                robot.ridicare.setPower(-0.1);
-                StrafeLeft(105, 0.5);
-                DriveBackward(45 , 0.5 , 0.5 , 0.5 , 0.5);
+                robot.ridicare.setPower(-0.7);
+                sleep(700);
+                robot.ridicare.setPower(0);
+                RotateRight(45);
+                DriveForward(210, 0.7, 0.7, 0.7, 0.7);
             }
             else
-            if (robot.distanta.getDistance(DistanceUnit.CM) > 30)
             {
-                StrafeRight(70, 0.7);
-                sleep(1000);
-                robot.ridicare.setPower(0.6);
-                sleep(750);
                 StopAllMotion();
-                DriveForward(30, 0.6, 0.6, 0.6, 0.6);
+                RotateRight(28);
+                DriveBackward(65, 0.5, 0.5, 0.5, 0.5);
                 StopAllMotion();
-                sleep(500);
-                robot.prindere.setPosition(0.5);
-                StopAllMotion();
-                robot.ridicare.setPower(-0.1);
-                sleep(3);
-                DriveBackward(37, 0.6, 0.6, 0.6, 0.6);
-                StopAllMotion();
+                robot.ridicare.setPower(-0.7);
+                sleep(200);
                 robot.ridicare.setPower(0);
+                sleep(200);
+                robot.carusel.setPower(0.9);
+                sleep(1900);
+                robot.carusel.setPower(0);
+                DriveForward(100,0.5,0.5,0.5,0.5);
+                RotateLeft(30);
                 StopAllMotion();
-                RotateLeft(82);
+                robot.ridicare.setPower(0.7);
+                sleep(350);
+                robot.ridicare.setPower(0);
+
+                DriveForward(13, 0.5, 0.5, 0.5, 0.5);
                 StopAllMotion();
-                DriveBackward(190, 0.5, 0.5, 0.5, 0.5);
+                robot.prindere.setPosition(0.5);
+                sleep(500);
+
+                DriveBackward(10, 0.5, 0.5, 0.5, 0.5);
                 StopAllMotion();
-                StrafeRight(65 , 0.5);
-                sleep(1000);
-                robot.carusel.setPower(-1);
-                sleep(2000);
-                robot.ridicare.setPower(-0.2);
-                StrafeLeft(105, 0.5);
-                DriveBackward(45 , 0.5 , 0.5 , 0.5 , 0.5);
+                robot.ridicare.setPower(-0.7);
+                sleep(130);
+                robot.ridicare.setPower(0);
+                RotateRight(46);
+                DriveForward(205, 0.7, 0.7, 0.7, 0.7);
+
             }
+
         }
-        
+        */
         telemetry.update();
     }
 

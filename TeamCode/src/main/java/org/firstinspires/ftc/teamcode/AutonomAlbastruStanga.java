@@ -33,7 +33,7 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.StrafeValue;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
 
-@Autonomous(name="AutonomAlbastruStanga mecanum")
+@Autonomous(name="Albastru Stanga", group = "oficial")
 
 public class AutonomAlbastruStanga extends LinearOpMode{
     A_hardwareMap robot   = new A_hardwareMap();
