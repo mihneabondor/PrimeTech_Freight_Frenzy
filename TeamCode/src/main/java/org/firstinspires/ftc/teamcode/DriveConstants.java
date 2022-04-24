@@ -20,9 +20,7 @@ public class DriveConstants {
      * These are motor constants that should be listed online for your motors.
      */
 
-    // FIXME: MAX_RPM for yellow jacket motor we use
-    // TODO: https://www.gobilda.com/yellow-jacket-planetary-gear-motors/
-    public static final double TICKS_PER_REV = 537.6;
+    public static final double TICKS_PER_REV = 537.7;
     public static final double MAX_RPM = 312;
 
     /*
@@ -35,9 +33,10 @@ public class DriveConstants {
      */
     public static final boolean RUN_USING_ENCODER = true;
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(10, 0, 0,
-            18);
+            getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
-    // getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV)
+    // 18
+    // FIXME: 4.5, 0.4, 0, 11.5
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -47,8 +46,10 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 3.94; // in
+    public static double WHEEL_RADIUS = 1.97; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
+
+    // TODO: maybe different track_width?
     public static double TRACK_WIDTH = 35; // in
 
     /*
@@ -68,8 +69,8 @@ public class DriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 200;
-    public static double MAX_ACCEL = 200;
+    public static double MAX_VEL = 62.01654253906262;
+    public static double MAX_ACCEL = 62.01654253906262;
     public static double MAX_ANG_VEL = Math.toRadians(60);
     public static double MAX_ANG_ACCEL = Math.toRadians(60);
 
