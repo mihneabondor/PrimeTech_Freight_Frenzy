@@ -33,6 +33,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.security.ProtectionDomain;
 import java.util.Locale;
 
 import com.acmerobotics.dashboard.FtcDashboard;
@@ -52,7 +53,7 @@ import static org.firstinspires.ftc.teamcode.A_hardwareMap.TURN_SPEED;
 import static org.firstinspires.ftc.teamcode.A_hardwareMap.TurnValue;
 
 
-@Autonomous(name="Coordonate", group = "Auto")
+@Autonomous(name="A. Coordonate", group = "Auto")
 public class Test_Autonom extends LinearOpMode  {
     FtcDashboard dashboard;
     private SampleMecanumDrive robot = null;
@@ -65,9 +66,11 @@ public class Test_Autonom extends LinearOpMode  {
         robot = new SampleMecanumDrive(hardwareMap);
 
         robot.setPoseEstimate(new Pose2d(11.6,-62));
-        robot.setExternalHeading(Math.toRadians(90));
+//        robot.setExternalHeading(Math.toRadians(0));
 
         dashboard = FtcDashboard.getInstance();
+
+        robot.pivotBrat.setPosition(0.5);
 
         waitForStart();
 
@@ -77,14 +80,81 @@ public class Test_Autonom extends LinearOpMode  {
         robot.updatePoseEstimate();
         currentPose = robot.getPoseEstimate();
 
-        TrajectorySequence punePreload = robot.trajectorySequenceBuilder(new Pose2d(11.6, -62, Math.toRadians(90)))
-                .forward(24)
+        TrajectorySequence punePreload = robot.trajectorySequenceBuilder(new Pose2d(11.6, -67, Math.toRadians(90)))
+                .addDisplacementMarker(() -> {
+                    robot.gheara.setPosition(0.26);
+                })
+                .lineTo(new Vector2d(-30, -35))
+//                .addTemporalMarker(0, () -> {
+//                    robot.ridicare.setPower(0.5);
+//                })
+//                .addTemporalMarker(0.6, () -> {
+//                    robot.ridicare.setPower(0);
+//                }) cazul 1
+//                .addTemporalMarker(0, () -> {
+//                    robot.ridicare.setPower(0.8);
+//                })
+//                .addTemporalMarker(0.7, () -> {
+//                    robot.ridicare.setPower(0);
+//               }) cazul 2
+                .addTemporalMarker(0, () -> {
+                    robot.ridicare.setPower(0.8);
+                })
+                .addTemporalMarker(1.3, () -> {
+                    robot.ridicare.setPower(0);
+               })
+                .addTemporalMarker(1.7, () -> {
+                    robot.gheara.setPosition(0.5);
+                })
                 .build();
 
         robot.followTrajectorySequence(punePreload);
 
-        robot.updatePoseEstimate();
+//        robot.updatePoseEstimate();
         currentPose = robot.getPoseEstimate();
+        robot.setExternalHeading(Math.toRadians(90));
+
+        TrajectorySequence mergeInWarehouse = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
+                .addTemporalMarker( 0.5, () -> {
+                    robot.ridicare.setPower(-0.8);
+                })
+                .addTemporalMarker( 1.18, () -> {
+                    robot.ridicare.setPower(0);
+                })
+                .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
+                .forward(60)
+                .addDisplacementMarker( () -> {
+                    robot.gheara.setPosition(0.2);
+                })
+                .lineTo(new Vector2d(15, -82))
+                .addTemporalMarker(7.2, () -> {
+                    robot.ridicare.setPower(0.8);
+                })
+                .addTemporalMarker(8.7, () -> {
+                    robot.ridicare.setPower(0);
+                })
+                .lineToLinearHeading(new Pose2d(-25 , -40, Math.toRadians(84)))
+//                .waitSeconds(1)
+                .addTemporalMarker(9.5, () -> {
+                    robot.gheara.setPosition(0.5);
+        })
+                .build();
+
+        robot.followTrajectorySequence(mergeInWarehouse);
+//        robot.followTrajectorySequence(mergeInWarehouse);
+
+        TrajectorySequence parcare = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
+                .addTemporalMarker( 0.5, () -> {
+                    robot.ridicare.setPower(-0.8);
+                })
+                .addTemporalMarker( 1.35, () -> {
+                    robot.ridicare.setPower(0);
+                })
+                .forward(40)
+//                .strafeLeft(50)
+                .build();
+        robot.followTrajectorySequence(parcare);
 
     }
 }

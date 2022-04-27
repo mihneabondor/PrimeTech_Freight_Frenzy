@@ -25,12 +25,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
+import org.firstinspires.ftc.teamcode.util.AxisDirection;
+import org.firstinspires.ftc.teamcode.util.BNO055IMUUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 
 import java.util.ArrayList;
@@ -70,7 +73,8 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     private TrajectoryFollower follower;
 
-    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
+    public DcMotorEx leftFront, leftRear, rightRear, rightFront, ridicare;
+    public Servo pivotBrat, gheara;
     private List<DcMotorEx> motors;
 
     private BNO055IMU imu;
@@ -116,12 +120,17 @@ public class SampleMecanumDrive extends MecanumDrive {
         // and the placement of the dot/orientation from https://docs.revrobotics.com/rev-control-system/control-system-overview/dimensions#imu-location
         //
         // For example, if +Y in this diagram faces downwards, you would use AxisDirection.NEG_Y.
-        // BNO055IMUUtil.remapZAxis(imu, AxisDirection.NEG_Y);
+//         BNO055IMUUtil.remapZAxis(imu, AxisDirection.NEG_X);
 
         leftFront = hardwareMap.get(DcMotorEx.class, "LeftFrontMotor");
         leftRear = hardwareMap.get(DcMotorEx.class, "LeftBackMotor");
         rightRear = hardwareMap.get(DcMotorEx.class, "RightBackMotor");
         rightFront = hardwareMap.get(DcMotorEx.class, "RightFrontMotor");
+        ridicare = hardwareMap.get(DcMotorEx.class, "ridicare");
+        pivotBrat = hardwareMap.get(Servo.class, "rotire");
+        gheara = hardwareMap.get(Servo.class, "prindere");
+
+
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
