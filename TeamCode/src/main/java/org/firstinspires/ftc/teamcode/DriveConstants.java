@@ -36,7 +36,6 @@ public class DriveConstants {
             getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
     // 18
-    // FIXME: 4.5, 0.4, 0, 11.5
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -49,7 +48,6 @@ public class DriveConstants {
     public static double WHEEL_RADIUS = 1.97; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
 
-    // TODO: maybe different track_width?
     public static double TRACK_WIDTH = 21.3; // in
 
     /*
