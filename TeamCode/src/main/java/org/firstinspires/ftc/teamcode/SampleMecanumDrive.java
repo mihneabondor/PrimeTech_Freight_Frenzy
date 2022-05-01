@@ -73,7 +73,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     private TrajectoryFollower follower;
 
-    public DcMotorEx leftFront, leftRear, rightRear, rightFront, ridicare;
+    public DcMotorEx leftFront, leftRear, rightRear, rightFront, ridicare, carusel;
     public Servo pivotBrat, gheara;
     private List<DcMotorEx> motors;
 
@@ -129,6 +129,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         ridicare = hardwareMap.get(DcMotorEx.class, "ridicare");
         pivotBrat = hardwareMap.get(Servo.class, "rotire");
         gheara = hardwareMap.get(Servo.class, "prindere");
+        carusel = hardwareMap.get(DcMotorEx.class, "carusel");
 
 
 
