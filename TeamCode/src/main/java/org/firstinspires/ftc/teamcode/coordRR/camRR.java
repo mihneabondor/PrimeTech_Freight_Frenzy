@@ -1,5 +1,86 @@
 package org.firstinspires.ftc.teamcode.coordRR;
 
-public class camRR {
-    // TODO: test camDetection & paste here
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+import org.openftc.easyopencv.OpenCvPipeline;
+
+public class camRR extends OpenCvPipeline {
+    Telemetry telemetry;
+    Mat mat = new Mat();
+
+    public enum Caz {
+        UNU,
+        DOI,
+        TREI
+    }
+    private volatile Caz caz = Caz.UNU;
+    static final Rect LEFT_ROI = new Rect(
+            new Point(90, 80),
+            new Point(160, 190)
+    );
+    static final Rect RIGHT_ROI = new Rect(
+            new Point(220, 100),
+            new Point(280, 190)
+    );
+    static double PERCENT_TRESHOLD = 0.3;
+    public camRR(Telemetry t) {telemetry = t;}
+
+    @Override
+    public Mat processFrame(Mat input) {
+        Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
+
+        // TODO: (hMin = 19 , sMin = 0, vMin = 196), (hMax = 179 , sMax = 51, vMax = 255)
+        // verde: Scalar lowHSV = new Scalar(59, 50, 40);
+        //        Scalar highHSV = new Scalar(99, 88, 100);
+        // (hMin = 41 , sMin = 42, vMin = 0), (hMax = 95 , sMax = 255, vMax = 245)
+        Scalar lowHSV = new Scalar(41, 42, 0);
+        Scalar highHSV = new Scalar(95, 255, 245);
+        Core.inRange(mat, lowHSV, highHSV, mat);
+        Mat left = mat.submat(LEFT_ROI);
+        Mat right = mat.submat(RIGHT_ROI);
+
+        double leftVal = Core.sumElems(left).val[0] / LEFT_ROI.area() / 255;
+        double rightVal = Core.sumElems(right).val[0] / RIGHT_ROI.area() / 255;
+
+        left.release();
+        right.release();
+
+        telemetry.addData("Left val:", (int) Core.sumElems(left).val[0]);
+        telemetry.addData("Right val:", (int) Core.sumElems(right).val[0]);
+        telemetry.addData("Left %:", Math.round(leftVal * 100) + "%");
+        telemetry.addData("Right %:", Math.round(rightVal * 100) + "%");
+
+        boolean rataLeft = leftVal > PERCENT_TRESHOLD;
+        boolean rataRight = rightVal > PERCENT_TRESHOLD;
+
+        if(rataRight) {
+            caz = Caz.TREI;
+            telemetry.addData("Caz", 3);
+        } else if (rataLeft) {
+            caz = Caz.DOI;
+            telemetry.addData("Caz", 2);
+        } else {
+            caz = Caz.UNU;
+            telemetry.addData("Caz", 1);
+        }
+        telemetry.update();
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2BGR);
+
+        Scalar colorNimic = new Scalar(255, 0, 0); // LOW
+        Scalar colorRata = new Scalar(0, 255, 0);  // HIGH
+
+        Imgproc.rectangle(mat, LEFT_ROI, caz == caz.UNU ? colorRata: colorNimic);
+        Imgproc.rectangle(mat, RIGHT_ROI, caz == caz.TREI ? colorRata: colorNimic);
+
+        return mat;
+    }
+
+    public Caz getCaz() {
+        return caz;
+    }
 }

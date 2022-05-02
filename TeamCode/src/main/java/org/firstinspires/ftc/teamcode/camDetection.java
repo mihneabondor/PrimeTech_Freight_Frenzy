@@ -20,14 +20,14 @@ public class camDetection extends OpenCvPipeline {
     }
     private volatile Caz caz = Caz.UNU;
     static final Rect LEFT_ROI = new Rect(
-            new Point(60, 35),
-            new Point(120, 75)
+            new Point(90, 80),
+            new Point(160, 190)
     );
     static final Rect RIGHT_ROI = new Rect(
-            new Point(220, 35),
-            new Point(280, 75)
+            new Point(220, 100),
+            new Point(280, 190)
     );
-    static double PERCENT_TRESHOLD = 0.4;
+    static double PERCENT_TRESHOLD = 0.3;
     public camDetection(Telemetry t) {telemetry = t;}
 
     @Override
@@ -37,8 +37,9 @@ public class camDetection extends OpenCvPipeline {
         // TODO: (hMin = 19 , sMin = 0, vMin = 196), (hMax = 179 , sMax = 51, vMax = 255)
         // verde: Scalar lowHSV = new Scalar(59, 50, 40);
         //        Scalar highHSV = new Scalar(99, 88, 100);
-        Scalar lowHSV = new Scalar(19, 0, 196);
-        Scalar highHSV = new Scalar(179, 51, 255);
+        // (hMin = 41 , sMin = 42, vMin = 0), (hMax = 95 , sMax = 255, vMax = 245)
+        Scalar lowHSV = new Scalar(41, 42, 0);
+        Scalar highHSV = new Scalar(95, 255, 245);
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat left = mat.submat(LEFT_ROI);
         Mat right = mat.submat(RIGHT_ROI);
@@ -61,11 +62,11 @@ public class camDetection extends OpenCvPipeline {
             caz = Caz.TREI;
             telemetry.addData("Caz", 3);
         } else if (rataLeft) {
-            caz = Caz.UNU;
-            telemetry.addData("Caz", 1);
-        } else {
             caz = Caz.DOI;
             telemetry.addData("Caz", 2);
+        } else {
+            caz = Caz.UNU;
+            telemetry.addData("Caz", 1);
         }
         telemetry.update();
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2BGR);
