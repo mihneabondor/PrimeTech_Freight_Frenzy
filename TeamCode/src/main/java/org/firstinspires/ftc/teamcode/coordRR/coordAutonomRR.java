@@ -69,10 +69,6 @@ public class coordAutonomRR extends LinearOpMode  {
     public void runOpMode() throws InterruptedException {
         robot = new SampleMecanumDrive(hardwareMap);
 
-        robot.setPoseEstimate(new Pose2d(11.6,-62));
-        dashboard = FtcDashboard.getInstance();
-        robot.pivotBrat.setPosition(0.5);
-
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         OpenCvCamera webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new camRR(telemetry );
@@ -92,6 +88,10 @@ public class coordAutonomRR extends LinearOpMode  {
 
         );
         robot.gheara.setPosition(0.25);
+        robot.setPoseEstimate(new Pose2d(11.6,-62));
+        dashboard = FtcDashboard.getInstance();
+        robot.pivotBrat.setPosition(0.5);
+
         waitForStart();
 
         telemetry.addData("unghi", robot.getRawExternalHeading());
@@ -160,8 +160,9 @@ public class coordAutonomRR extends LinearOpMode  {
                 })
                 .addTemporalMarker(8.2, () -> {
                     robot.ridicare.setPower(0);
+                    robot.pivotBrat.setPosition(0.47);
                 })
-                .lineToLinearHeading(new Pose2d(-26   , -40, Math.toRadians(84)))
+                .lineToLinearHeading(new Pose2d(-25, -40, Math.toRadians(90)))
                 .addTemporalMarker(9.5, () -> {
                     robot.gheara.setPosition(0.5);
                 })
@@ -169,7 +170,7 @@ public class coordAutonomRR extends LinearOpMode  {
 
         TrajectorySequence parcareInWarehouse = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
                 .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
-                .addTemporalMarker(0.5, () -> {
+                .addTemporalMarker(0.8, () -> {
                     robot.ridicare.setPower(-0.8);
                 })
                 .addTemporalMarker(1.35, () -> {
@@ -210,6 +211,33 @@ public class coordAutonomRR extends LinearOpMode  {
                 })
                 .addTemporalMarker(1.18, () -> {
                     robot.ridicare.setPower(0);
+                    robot.pivotBrat.setPosition(0.53);
+                })
+                .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
+                .forward(52)
+                .addDisplacementMarker(() -> {
+                    robot.gheara.setPosition(0.2);
+                })
+                .lineTo(new Vector2d(15, -82))
+                .addTemporalMarker(6.8, () -> {
+                    robot.ridicare.setPower(0.85);
+                })
+                .addTemporalMarker(8.2, () -> {
+                    robot.ridicare.setPower(0);
+                })
+                .lineToLinearHeading(new Pose2d(-25, -40, Math.toRadians(84)))
+                .addTemporalMarker(9.5, () -> {
+                    robot.gheara.setPosition(0.5);
+                })
+                .build();
+
+        TrajectorySequence mergeInWarehouse2 = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
+                .addTemporalMarker(0.5, () -> {
+                    robot.ridicare.setPower(-0.8);
+                })
+                .addTemporalMarker(1.18, () -> {
+                    robot.ridicare.setPower(0);
+                    robot.pivotBrat.setPosition(0.53);
                 })
                 .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
                 .forward(60)
@@ -217,10 +245,10 @@ public class coordAutonomRR extends LinearOpMode  {
                     robot.gheara.setPosition(0.2);
                 })
                 .lineTo(new Vector2d(15, -82))
-                .addTemporalMarker(7.2, () -> {
-                    robot.ridicare.setPower(0.8);
+                .addTemporalMarker(6.8, () -> {
+                    robot.ridicare.setPower(0.85);
                 })
-                .addTemporalMarker(8.7, () -> {
+                .addTemporalMarker(8, () -> {
                     robot.ridicare.setPower(0);
                 })
                 .lineToLinearHeading(new Pose2d(-25, -40, Math.toRadians(84)))
@@ -231,7 +259,7 @@ public class coordAutonomRR extends LinearOpMode  {
 
         TrajectorySequence parcareInWarehouse = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
                 .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
-                .addTemporalMarker(0.5, () -> {
+                .addTemporalMarker(0.8, () -> {
                     robot.ridicare.setPower(-0.8);
                 })
                 .addTemporalMarker(1.35, () -> {
@@ -255,11 +283,13 @@ public class coordAutonomRR extends LinearOpMode  {
                 })
                 .build();
 
+
         robot.followTrajectorySequence(punePreload);
 
         robot.setExternalHeading(Math.toRadians(90));
 
         robot.followTrajectorySequence(mergeInWarehouse);
+        robot.followTrajectorySequence(mergeInWarehouse2);
         robot.followTrajectorySequence(parcareInWarehouse);
     }
 
@@ -268,8 +298,35 @@ public class coordAutonomRR extends LinearOpMode  {
                 .addTemporalMarker(0.5, () -> {
                     robot.ridicare.setPower(-0.8);
                 })
+                .addTemporalMarker(0.9, () -> {
+                    robot.ridicare.setPower(0);
+                    robot.pivotBrat.setPosition(0.53);
+                })
+                .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
+                .forward(52)
+                .addDisplacementMarker(() -> {
+                    robot.gheara.setPosition(0.2);
+                })
+                .lineTo(new Vector2d(15, -82))
+                .addTemporalMarker(6.8, () -> {
+                    robot.ridicare.setPower(0.85);
+                })
+                .addTemporalMarker(8.2, () -> {
+                    robot.ridicare.setPower(0);
+                })
+                .lineToLinearHeading(new Pose2d(-25, -40, Math.toRadians(84)))
+                .addTemporalMarker(9.5, () -> {
+                    robot.gheara.setPosition(0.5);
+                })
+                .build();
+
+        TrajectorySequence mergeInWarehouse2 = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
+                .addTemporalMarker(0.5, () -> {
+                    robot.ridicare.setPower(-0.8);
+                })
                 .addTemporalMarker(1.18, () -> {
                     robot.ridicare.setPower(0);
+                    robot.pivotBrat.setPosition(0.53);
                 })
                 .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
                 .forward(60)
@@ -277,10 +334,10 @@ public class coordAutonomRR extends LinearOpMode  {
                     robot.gheara.setPosition(0.2);
                 })
                 .lineTo(new Vector2d(15, -82))
-                .addTemporalMarker(7.2, () -> {
-                    robot.ridicare.setPower(0.8);
+                .addTemporalMarker(6.8, () -> {
+                    robot.ridicare.setPower(0.85);
                 })
-                .addTemporalMarker(8.7, () -> {
+                .addTemporalMarker(8, () -> {
                     robot.ridicare.setPower(0);
                 })
                 .lineToLinearHeading(new Pose2d(-25, -40, Math.toRadians(84)))
@@ -291,10 +348,10 @@ public class coordAutonomRR extends LinearOpMode  {
 
         TrajectorySequence parcareInWarehouse = robot.trajectorySequenceBuilder(new Pose2d(-30, -35, Math.toRadians(90)))
                 .lineToLinearHeading(new Pose2d(18, -80, Math.toRadians(0)))
-                .addTemporalMarker(0.5, () -> {
+                .addTemporalMarker(0.8, () -> {
                     robot.ridicare.setPower(-0.8);
                 })
-                .addTemporalMarker(1.35, () -> {
+                .addTemporalMarker(1.5, () -> {
                     robot.ridicare.setPower(0);
                 })
                 .forward(40)
@@ -321,6 +378,7 @@ public class coordAutonomRR extends LinearOpMode  {
         robot.setExternalHeading(Math.toRadians(90));
 
         robot.followTrajectorySequence(mergeInWarehouse);
+        robot.followTrajectorySequence(mergeInWarehouse2);
         robot.followTrajectorySequence(parcareInWarehouse);
     }
 }
