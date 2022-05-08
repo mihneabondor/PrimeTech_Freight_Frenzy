@@ -28,10 +28,6 @@ public class TeleOPautomat extends OpMode {
             robot.ridicare.setPower(0.5);
         }
 
-        if(!robot.ridicare.isBusy()) {
-            robot.ridicare.setPower(0);
-        }
-
         telemetry.addData("Ridicare encoder", robot.ridicare.getCurrentPosition());
     }
 }
