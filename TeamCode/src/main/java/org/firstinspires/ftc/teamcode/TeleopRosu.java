@@ -71,6 +71,7 @@ public class TeleopRosu extends OpMode
         dreaptaFata.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         stangaFata.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         stangaSpate.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.ridicare.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -126,8 +127,10 @@ public class TeleopRosu extends OpMode
             robot.carusel.setPower(0);
             robot.carusel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
+
         
         telemetry.addData("rotire:",r);
+        telemetry.addData("ridicare", robot.ridicare.getCurrentPosition());
         telemetry.addData("servo rotire:", pivotBrat.getPosition());
         telemetry.addData("distanta:", robot.distanta.getDistance(DistanceUnit.CM));
         telemetry.addData("n:", n);
